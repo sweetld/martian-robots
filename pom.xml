@@ -21,7 +21,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
-        <start-class>com.tempestiva.lme.Main</start-class>
+        <start-class>com.tempestiva.lme.MartianRobotsApplication</start-class>
     </properties>
 
     <dependencies>

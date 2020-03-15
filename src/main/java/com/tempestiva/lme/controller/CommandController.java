@@ -21,6 +21,6 @@ public class CommandController {
                                             .orientation(Orientation.N)
                                             .point(Point.builder().x(0).y(0).build())
                                             .build();
-        return new Status(startingPosition, "Hello, " + HtmlUtils.htmlEscape(message.getCommand()) + "!");
+        return new Status(startingPosition, "Command sent: " + HtmlUtils.htmlEscape(message.getCommand()) + "!");
     }
 }
