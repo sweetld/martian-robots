@@ -14,6 +14,7 @@ public class InMemoryRepository implements MarsRepository {
     @Override
     public void setupSurface(final Point upperRight) {
         int totalPoints = upperRight.getX() * upperRight.getY();
+        surface = new ArrayList<>(totalPoints);
         for (int i = 0; i < totalPoints; i++) {
             for (int x = 0; x < upperRight.getX(); x++) {
                 for (int y = 0; y < upperRight.getY(); y++) {
