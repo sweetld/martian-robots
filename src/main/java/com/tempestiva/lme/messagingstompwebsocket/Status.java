@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Status {
+    Integer robotId;
     Position currentPosition;
     String message;
 }
