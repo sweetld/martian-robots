@@ -17,7 +17,6 @@ public class SetupController {
     @MessageMapping("/setup")
     @SendTo("/topic/status")
     public Status processCommand(SetupMessage message) throws Exception {
-        Thread.sleep(1000); // simulated delay
         return new Status(null, null, marsService.setupSurface(message));
     }
 }

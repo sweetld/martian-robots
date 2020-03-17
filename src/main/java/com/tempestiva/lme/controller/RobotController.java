@@ -27,10 +27,7 @@ public class RobotController {
     @MessageMapping("/robot")
     @SendTo("/topic/status")
     public Status processCommand(RobotMessage message) throws Exception {
-        Thread.sleep(1000); // simulated delay
-
         Robot newRobot = marsService.addRobot(message);
-
         return new Status(newRobot.getId(), newRobot.getStartingPosition(), "Created new Robot!" );
     }
 }

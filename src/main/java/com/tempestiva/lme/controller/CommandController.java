@@ -21,8 +21,6 @@ public class CommandController {
     @MessageMapping("/command")
     @SendTo("/topic/status")
     public Status processCommand(CommandMessage message) throws Exception {
-        Thread.sleep(1000); // simulated delay
-
         if (message.getCommand().contains("RUN")) {
             marsService.runSimulation();
             return new Status(null, null, "Simulation Started");

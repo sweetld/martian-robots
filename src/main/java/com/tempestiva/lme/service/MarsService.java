@@ -24,14 +24,21 @@ public class MarsService {
 
     public Robot addRobot(final RobotMessage message) {
         Position startingPosition = Position.builder().point(message.getStartingPoint()).orientation(message.getOrientation()).build();
-        Robot robot = Robot.builder().startingPosition(startingPosition).id(marsRepository.getNextRobotId()).build();
+        Robot robot = Robot.builder().startingPosition(startingPosition).commands(message.getCommands()).id(marsRepository.getNextRobotId()).build();
         marsRepository.addRobot(robot);
         return robot;
     }
 
-    public void runSimulation() {
-        Status update = new Status(1, null, "Update");
-        template.convertAndSend("/topic/greetings", update);
+    private void sendUpdate(Robot robot) {
+        Status update = new Status(robot.getId(), robot.getCurrentPosition(), "Update");
+        template.convertAndSend("/topic/status", update);
+    }
 
+    public void runSimulation() {
+        marsRepository.getRobots().forEach((index, robot) -> {
+            robot.walk(() -> {
+                sendUpdate(robot);
+            });
+        });
     }
 }
