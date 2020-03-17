@@ -4,6 +4,7 @@ import com.tempestiva.lme.model.Point;
 import com.tempestiva.lme.model.Robot;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class InMemoryRepository implements MarsRepository {
     private Integer nextRobotId = 0;
@@ -36,7 +37,10 @@ public class InMemoryRepository implements MarsRepository {
 
     @Override
     public Map<Integer, Robot> getRobots() {
-        return robots;
+        return robots.entrySet()
+                     .stream()
+                     .collect(Collectors.toMap(Map.Entry::getKey,
+                                               Map.Entry::getValue));
     }
 
     @Override
