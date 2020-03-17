@@ -11,7 +11,7 @@ public class Robot {
     Position startingPosition;
     Position oldPosition;
     String commands;
-    Boolean lost;
+    Boolean lost = false;
 
     public void reset() {
         currentPosition = startingPosition;
