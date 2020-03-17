@@ -13,6 +13,9 @@ public class Robot {
 
     public void walk(Runnable callback) {
         currentPosition = startingPosition;
+        if (commands == null) {
+            return;
+        }
         for (int i = 0; i < commands.length(); i++){
             // simulated delay
             try {
