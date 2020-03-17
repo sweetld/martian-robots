@@ -19,6 +19,7 @@ public class MarsService {
 
     public String  setupSurface(final SetupMessage message) {
         marsRepository.setupSurface(message.getUpperRight());
+        marsRepository.getRobots().clear();
         return "Created Mars Surface with " + marsRepository.getSurface().size() + "  Points.";
     }
 
