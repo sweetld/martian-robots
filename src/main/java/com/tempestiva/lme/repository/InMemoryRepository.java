@@ -57,4 +57,10 @@ public class InMemoryRepository implements MarsRepository {
     public Integer getCurrentlyMovingRobot() {
         return currentlyMovingRobot;
     }
+
+    @Override
+    public void clearRobots() {
+        robots.clear();
+        nextRobotId = 0;
+    }
 }

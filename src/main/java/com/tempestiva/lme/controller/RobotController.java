@@ -28,6 +28,6 @@ public class RobotController {
     @SendTo("/topic/status")
     public Status processCommand(RobotMessage message) throws Exception {
         Robot newRobot = marsService.addRobot(message);
-        return new Status(newRobot.getId(), newRobot.getStartingPosition(), newRobot.getOldPosition(),"Created new Robot!" );
+        return new Status(newRobot.getId(), newRobot.getStartingPosition(), newRobot.getOldPosition(),"Created new Robot ID: " + newRobot.getId() );
     }
 }

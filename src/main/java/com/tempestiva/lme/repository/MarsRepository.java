@@ -21,4 +21,6 @@ public interface MarsRepository {
     Integer getNextRobotId();
 
     Integer getCurrentlyMovingRobot();
+
+    void clearRobots();
 }

@@ -19,7 +19,7 @@ public class MarsService {
 
     public String setupSurface(final SetupMessage message) {
         marsRepository.setupSurface(message.getUpperRight());
-        marsRepository.getRobots().clear();
+        marsRepository.clearRobots();
         return "Created Mars Surface with " + marsRepository.getSurface().size() + "  Points.";
     }
 
@@ -40,7 +40,7 @@ public class MarsService {
     }
 
     public void sendUpdate(Robot robot) {
-        Status update = new Status(robot.getId(), robot.getCurrentPosition(), robot.getOldPosition(), "Update");
+        Status update = new Status(robot.getId(), robot.getCurrentPosition(), robot.getOldPosition(), "Update for Robot ID: " + robot.getId());
         template.convertAndSend("/topic/status", update);
     }
 
