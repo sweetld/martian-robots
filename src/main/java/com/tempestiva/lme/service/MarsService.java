@@ -53,7 +53,7 @@ public class MarsService {
             robot.walk(() -> {
                 sendUpdate(robot);
             });
-            sendUpdate(new Status(robot.getId(), robot.getCurrentPosition(), robot.getOldPosition(), robot.getLost() ? "Result Lost" : "Result"));
+            sendUpdate(new Status(robot.getId(), robot.getCurrentPosition(), robot.getOldPosition(), robot.isLost() ? "Result Lost" : "Result"));
         });
     }
 
