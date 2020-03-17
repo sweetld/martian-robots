@@ -11,6 +11,7 @@ public class Robot {
     Position startingPosition;
     Position oldPosition;
     String commands;
+    Boolean lost;
 
     public void reset() {
         currentPosition = startingPosition;
@@ -18,15 +19,15 @@ public class Robot {
     }
 
     public void walk(Runnable callback) {
-        oldPosition = currentPosition;
-        currentPosition = startingPosition;
         if (commands == null) {
             return;
         }
+        oldPosition = currentPosition;
+        currentPosition = startingPosition;
         for (int i = 0; i < commands.length(); i++){
             // simulated delay
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
