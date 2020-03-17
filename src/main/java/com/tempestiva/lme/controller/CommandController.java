@@ -23,9 +23,9 @@ public class CommandController {
     public Status processCommand(CommandMessage message) throws Exception {
         if (message.getCommand().contains("RUN")) {
             marsService.runSimulation();
-            return new Status(null, null, "Simulation Started");
+            return new Status(null, null, null,"Simulation Started");
         } else {
-            return new Status(null, null, "Unrecognised command!");
+            return new Status(null, null, null,"Unrecognised command!");
         }
     }
 }

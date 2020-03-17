@@ -9,5 +9,6 @@ import lombok.Data;
 public class Status {
     Integer robotId;
     Position currentPosition;
+    Position oldPosition;
     String message;
 }

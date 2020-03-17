@@ -31,7 +31,7 @@ public class MarsService {
     }
 
     private void sendUpdate(Robot robot) {
-        Status update = new Status(robot.getId(), robot.getCurrentPosition(), "Update");
+        Status update = new Status(robot.getId(), robot.getCurrentPosition(), robot.getOldPosition(), "Update");
         template.convertAndSend("/topic/status", update);
     }
 

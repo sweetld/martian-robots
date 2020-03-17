@@ -17,6 +17,6 @@ public class SetupController {
     @MessageMapping("/setup")
     @SendTo("/topic/status")
     public Status processCommand(SetupMessage message) throws Exception {
-        return new Status(null, null, marsService.setupSurface(message));
+        return new Status(null, null, null, marsService.setupSurface(message));
     }
 }

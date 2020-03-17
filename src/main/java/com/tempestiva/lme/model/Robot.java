@@ -9,9 +9,11 @@ public class Robot {
     Integer id;
     Position currentPosition;
     Position startingPosition;
+    Position oldPosition;
     String commands;
 
     public void walk(Runnable callback) {
+        oldPosition = currentPosition;
         currentPosition = startingPosition;
         if (commands == null) {
             return;
