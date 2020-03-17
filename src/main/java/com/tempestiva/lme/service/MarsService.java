@@ -17,22 +17,35 @@ public class MarsService {
     @Autowired
     private SimpMessagingTemplate template;
 
-    public String  setupSurface(final SetupMessage message) {
+    public String setupSurface(final SetupMessage message) {
         marsRepository.setupSurface(message.getUpperRight());
         marsRepository.getRobots().clear();
         return "Created Mars Surface with " + marsRepository.getSurface().size() + "  Points.";
     }
 
     public Robot addRobot(final RobotMessage message) {
-        Position startingPosition = Position.builder().point(message.getStartingPoint()).orientation(message.getOrientation()).build();
-        Robot robot = Robot.builder().startingPosition(startingPosition).commands(message.getCommands()).id(marsRepository.getNextRobotId()).build();
+        Position startingPosition = Position.builder()
+                                            .point(message.getStartingPoint())
+                                            .orientation(message.getOrientation())
+                                            .build();
+        Robot robot = Robot.builder()
+                           .startingPosition(startingPosition)
+                           .currentPosition(startingPosition.toBuilder().build())
+                           .oldPosition(startingPosition.toBuilder().build())
+                           .commands(message.getCommands())
+                           .id(marsRepository.getNextRobotId())
+                           .build();
         marsRepository.addRobot(robot);
         return robot;
     }
 
-    private void sendUpdate(Robot robot) {
+    public void sendUpdate(Robot robot) {
         Status update = new Status(robot.getId(), robot.getCurrentPosition(), robot.getOldPosition(), "Update");
         template.convertAndSend("/topic/status", update);
+    }
+
+    public void sendUpdate(Status status) {
+        template.convertAndSend("/topic/status", status);
     }
 
     public void runSimulation() {
@@ -41,5 +54,9 @@ public class MarsService {
                 sendUpdate(robot);
             });
         });
+    }
+
+    public void resetSimulation() {
+        marsRepository.getRobots().forEach((index, robot) -> robot.reset());
     }
 }

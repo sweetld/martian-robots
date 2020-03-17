@@ -12,6 +12,11 @@ public class Robot {
     Position oldPosition;
     String commands;
 
+    public void reset() {
+        currentPosition = startingPosition;
+        oldPosition = startingPosition;
+    }
+
     public void walk(Runnable callback) {
         oldPosition = currentPosition;
         currentPosition = startingPosition;

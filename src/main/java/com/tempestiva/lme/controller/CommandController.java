@@ -22,8 +22,11 @@ public class CommandController {
     @SendTo("/topic/status")
     public Status processCommand(CommandMessage message) throws Exception {
         if (message.getCommand().contains("RUN")) {
+            marsService.resetSimulation();
+            marsService.sendUpdate(new Status(null,null,null, "Simulation Reset"));
             marsService.runSimulation();
-            return new Status(null, null, null,"Simulation Started");
+            marsService.sendUpdate(new Status(null,null,null, "Simulation Started"));
+            return new Status(null, null, null,"Simulation Completed");
         } else {
             return new Status(null, null, null,"Unrecognised command!");
         }
