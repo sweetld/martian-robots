@@ -45,6 +45,8 @@ public class Robot {
                 case 'F':
                     currentPosition.forward(1);
                     break;
+
+                default:
             }
             callback.run();
         }

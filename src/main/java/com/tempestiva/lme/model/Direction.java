@@ -5,7 +5,7 @@ public enum Direction {
     R(90),
     F(0);
 
-    private int degree;
+    private final int degree;
 
     Direction(int degree) {
         this.degree = degree;

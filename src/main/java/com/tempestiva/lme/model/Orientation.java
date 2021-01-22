@@ -8,7 +8,7 @@ public enum Orientation {
     S(180),
     W(270);
 
-    private int degree;
+    private final int degree;
 
     Orientation(int degree) {
         this.degree = degree;

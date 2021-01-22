@@ -7,15 +7,16 @@ import com.tempestiva.lme.model.Position;
 import com.tempestiva.lme.model.Robot;
 import com.tempestiva.lme.repository.InMemoryRepository;
 import com.tempestiva.lme.repository.MarsRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MarsService {
-    private MarsRepository marsRepository = new InMemoryRepository();
-    @Autowired
-    private SimpMessagingTemplate template;
+    private final MarsRepository marsRepository = new InMemoryRepository();
+    private final SimpMessagingTemplate template;
 
     public String setupSurface(final SetupMessage message) {
         marsRepository.setupSurface(message.getUpperRight());
@@ -50,9 +51,7 @@ public class MarsService {
 
     public void runSimulation() {
         marsRepository.getRobots().forEach((index, robot) -> {
-            robot.walk(() -> {
-                sendUpdate(robot);
-            });
+            robot.walk(() -> sendUpdate(robot));
             sendUpdate(new Status(robot.getId(), robot.getCurrentPosition(), robot.getOldPosition(), robot.isLost() ? "Result Lost" : "Result"));
         });
     }
